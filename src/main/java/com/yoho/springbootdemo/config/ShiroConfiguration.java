@@ -15,7 +15,7 @@ import java.util.Map;
  * Description:shiro权限控制配置
  */
 //@Configuration
-//@Log4j
+//@Log4j2
 public class ShiroConfiguration {
 
     /**
