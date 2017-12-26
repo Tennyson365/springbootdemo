@@ -1,0 +1,140 @@
+name: test
+server:
+  #自定义访问路径
+  context-path: /spring-demo
+  #自定义端口
+  port: 8080
+  #定义session失效时间
+  session:
+    timeout:  300
+  tomcat:
+    #tomcat最大线程数 默认为200
+    max-threads: 800
+    #URI编码
+    uri-encoding: UTF-8
+    #存放日志、dumpd等文件的临时文件夹，默认为tmp文件夹（C:\Users\Shanhy\AppData\Local\Temp）
+    basedir: /Users/tennyson/Documents/Project/Java/springbootDemo/logs
+
+#配置监控，redis监控默认是开启状态，如果没有配置redis，启动时会报错
+management:
+  port: 54001
+  health:
+    mail:
+      enabled: false
+    redis:
+      enabled: false
+
+spring:
+  thymeleaf:
+    prefix: 'classpath:/templates/'
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+
+  datasource:
+    platform: Mysql
+    driver-class-name: com.mysql.jdbc.Driver
+    url:  jdbc:mysql://120.78.206.198:3306/DEV_SYS?characterEncoding=utf8&useSSL=false
+    username: dev_user
+    password: 1q2w3e4r
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    tomcat:
+      #连接池的最大空闲连接数
+      max-active: 100
+#      max-idle: 8
+      #连接池的最小空闲连接数
+      min-idle: 8
+      #连接池的初始化连接数
+      initial-size: 10
+      #数据库链接返回连接池之前的空闲时间
+      max-wait: 60000
+      #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      #配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      #取得、 返回对象和空闲时是否进行验证， 检查对象是否有效， 默认都为 false 即不验证
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: false
+      validation-query: SELECT 'X'
+
+#      maxPoolPreparedStatementPerConnectionSize:  20
+
+#      filter:
+#        - stat
+#        - wall
+#        - slf4j
+
+  jpa:
+    database: mysql
+    open-in-view: true
+    show-sql: false
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: false
+    hibernate:
+      #自动更新创建、更新、验证数据库表结构
+      #create       每次加载hibernate时都会删除上一次生成的表，根据实体类再重新生成新表，没变化也会执行，容易导致数据丢失
+      #create-drop  每次加载hibernate时根据实体类生成表，但是sessionFactory一关闭，表就会自动删除
+      #update       第一次加载hibernate是根据实体类自动更新表结构，即时表结构改变了，但表中的行仍然存在，不会删除以前的行。
+      #validata     每次加载hibernate时，验证创建数据库表结构，只会和数据库中的表进行比较，不会创建新表，但是会插入新数据。
+      hbm2ddl.auto: update
+
+
+  mail:
+    #邮箱主机
+    host:
+    username:
+    password:
+    #
+    properties:
+
+  #dubbo
+  dubbo:
+    application:
+      #应用名称
+      name: provider
+    registry:
+      #注册中心地址
+      address: zookeeper://192.168.0.87:2181
+    protocol:
+      #协议名称
+      name: dubbo
+      #协议端口
+      port: 8090
+    #监控
+    monitor:
+      protocol: registry
+    #服务类包路径
+    scan: com.yoho.dubbo
+
+#日志文件夹
+logging:
+  config: 'classpath:config/log4j2.xml'
+  #日志存放目录
+  path: /Users/tennyson/Documents/Project/Java/springbootDemo/logs
+  #日志文件名称，默认为spring.log
+  file: demo4boot
+
+
+
+#开启调试模式
+#debug: true
+
+
+
+#  com.yoho.demo.config.MultipartConfig  配置类已设置
+#  http:
+#    multipart:
+#      #设置单个文件最大限制
+#      max-file-size: 5MB
+#      #设置多文件总和最大限制
+#      max-request-size: 5MB
+
+
+
+
+
+
